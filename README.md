@@ -1,8 +1,8 @@
-# Customer Success Balancing simplified
+# Customer Success Balancing Simplified
 
 ## Versão do Nodejs utilizada
 
-Para essa versão utilizei node 16.13 qualquer versão LTS posterior deve não apresentar problemas.
+Para essa versão utilizei node 15.16 qualquer versão LTS posterior deve não apresentar problemas.
 Para os usuários de vscode como IDE adicionei a pasta .devcontainer que permite a inicilização de todo ambiente via docker.
 O arquivo .devcontainer/alpine.debug.Dockerfile permite similar o mesmo container de outras formas.
 
