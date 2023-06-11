@@ -1,0 +1,24 @@
+version: '3.4'
+
+networks:
+  customer-success-balancing-simplified-net:
+    driver: bridge
+
+services:
+  customer-success-balancing-simplified-debug:
+    # env_file:
+    #   - ../.env
+    build:
+      context: ./
+      dockerfile: alpine.debug.Dockerfile
+      target: debug
+    volumes:
+      - ..:/usr/src/app
+    networks:
+      - customer-success-balancing-simplified-net
+    # ports:
+    #   - "3002:3002"
+    container_name: customer-success-balancing-simplified-debug
+    image: customer-success-balancing-simplified-debug:latest
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    tty: true
