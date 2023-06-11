@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/customer-success-balancing.js",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "clean": "rm -rf dist && rm -rf coverage",
     "build": "yarn clean && tsc -p .",

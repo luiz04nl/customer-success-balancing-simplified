@@ -1,4 +1,4 @@
-FROM node:18.16.0-alpine3.17 AS debug
+FROM node:20.3.0-alpine3.17 AS debug
 
 WORKDIR /usr/src/app
 
