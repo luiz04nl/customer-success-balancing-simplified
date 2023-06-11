@@ -6,8 +6,6 @@ import { Exception } from './data/object-value/exception'
 import { Identifier } from './data/object-value/identifier'
 
 export class CustomerSuccessBalancing {
-  private _customerSuccessBalancingMaps: CustomerSuccessBalancingMap[] = []
-
   public constructor(
     private _customerSuccessCollection: CustomerSuccess[],
     private _customers: Customer[],
@@ -15,14 +13,6 @@ export class CustomerSuccessBalancing {
   ) {}
 
   public execute(): Identifier {
-    return this._identifierOfCustomerSuccessAvailableWithMostCustomers()
-  }
-
-  public getCustomerSuccessBalancing(): CustomerSuccessBalancingMap[] {
-    return this._customerSuccessBalancingMaps
-  }
-
-  private factoryCustomerSuccessBalancing(): void {
     const availableCustomerSuccessCollection = this._customerSuccessCollection
       .filter(
         (customerSuccess) =>
@@ -50,21 +40,11 @@ export class CustomerSuccessBalancing {
       }
     )
 
-    this._customerSuccessBalancingMaps = customerSuccessBalancingMaps
-  }
-
-  private _identifierOfCustomerSuccessAvailableWithMostCustomers(): Identifier {
-    this.factoryCustomerSuccessBalancing()
-
-    const customerSuccessBalancingMaps =
-      this._customerSuccessBalancingMaps.sort((a, b) =>
-        a.customers.length < b.customers.length ? 1 : -1
-      )
-
     try {
       const customerSuccessBalancingMapWithMoreCustomers =
-        customerSuccessBalancingMaps.reduce(
-          (accumulator, currentCustomerSuccessBalancingMaps) => {
+        customerSuccessBalancingMaps
+          .sort((a, b) => (a.customers.length < b.customers.length ? 1 : -1))
+          .reduce((accumulator, currentCustomerSuccessBalancingMaps) => {
             if (
               currentCustomerSuccessBalancingMaps.id !== accumulator.id &&
               currentCustomerSuccessBalancingMaps.customers.length ===
@@ -73,9 +53,7 @@ export class CustomerSuccessBalancing {
               throw new Error('Break Even')
             }
             return accumulator
-          },
-          customerSuccessBalancingMaps[0]
-        )
+          }, customerSuccessBalancingMaps[0])
 
       return customerSuccessBalancingMapWithMoreCustomers.id
     } catch (error: Exception) {
